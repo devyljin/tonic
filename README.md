@@ -10,7 +10,7 @@
 - Copiez le .env.template et renomez le .env
 - Modifier le .env avec vos parametrages
 
-- Importez et modifiez votre `configuration.php`
+- Importez le dossier `override-no-commited` et modifiez votre `override-no-commited/configuration.php` au besoin
 ```php
     
         public $dbtype = 'mysqli';
