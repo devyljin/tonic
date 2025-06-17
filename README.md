@@ -1,4 +1,6 @@
-# Utilisations
+![Image Générée par IA](../tonic/toniclogo.png)
+
+# Tonic v1.0 by Jin
 
 ## Dependences : 
 
@@ -27,3 +29,7 @@
 | `./setup.sh`  | Lance l'installation d'un environement de dev       |
 | `./import.sh` | Lance le gestionnaire d'import de données           |
 | `./sync.sh`   | Lance le gestionnaire de synchronisation de projets |
+
+
+##### Développé par Alexandre QUILAN-DELAISTRE
+##### Droits réservés à Agrume 2025 ©
