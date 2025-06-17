@@ -1,0 +1,10 @@
+/main-repo/
+/db_data/
+.env
+.env.*
+/jintonus/dump/
+/override-no-commited/
+
+
+#On garde le template de .env
+!.env.template

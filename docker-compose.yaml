@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  joomla:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: deviljin-daemon:3.8.2-composer
+    ports:
+      - '8080:80'
+    restart: always
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: examplepass
+      JOOMLA_DB_NAME: joomla_db
+      JOOMLA_SITE_NAME: Joomla
+      JOOMLA_ADMIN_USER: Joomla Hero
+      JOOMLA_ADMIN_USERNAME: joomla
+      JOOMLA_ADMIN_PASSWORD: joomla@secured
+      JOOMLA_ADMIN_EMAIL: joomla@example.com
+    volumes:
+      - './main-repo:/var/www/html'
+    networks:
+      - joomla_network
+
+  db:
+    image: mariadb:10.11.11
+    restart: always
+    container_name: joomla_db
+    ports:
+      - '3333:3306'
+    environment:
+      MYSQL_DATABASE: joomla_db
+      MYSQL_USER: joomla
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - './db_data:/var/lib/mysql'
+    networks:
+      - joomla_network
+
+networks:
+  joomla_network:
+
+volumes:
+  db_data:
