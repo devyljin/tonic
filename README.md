@@ -1,4 +1,4 @@
-![Image Générée par IA](../tonic/toniclogo.png)
+![Image Générée par IA](toniclogo.png)
 
 # Tonic v1.0 by Jin
 
