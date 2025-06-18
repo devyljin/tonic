@@ -12,9 +12,9 @@ services:
     restart: always
     environment:
       JOOMLA_DB_HOST: db
-      JOOMLA_DB_USER: ${LOCAL_MYSQL_USER}
-      JOOMLA_DB_PASSWORD: ${LOCAL_MYSQL_PASSWORD}
-      JOOMLA_DB_NAME: ${LOCAL_MYSQL_DATABASE}
+      JOOMLA_DB_USER: ${DB_USER}
+      JOOMLA_DB_PASSWORD: ${DB_PASSWORD}
+      JOOMLA_DB_NAME: ${DB_NAME}
       JOOMLA_SITE_NAME: Tonic
       JOOMLA_ADMIN_USER: Jin FromScratch
       JOOMLA_ADMIN_USERNAME: admin
@@ -32,9 +32,9 @@ services:
     ports:
       - '3333:3306'
     environment:
-      MYSQL_DATABASE: ${LOCAL_MYSQL_DATABASE}
-      MYSQL_USER: ${LOCAL_MYSQL_USER}
-      MYSQL_PASSWORD: ${LOCAL_MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - '${LOCAL_DB_PATH}:/var/lib/mysql'
@@ -43,6 +43,3 @@ services:
 
 networks:
   joomla_network:
-
-volumes:
-  db_data:
