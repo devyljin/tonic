@@ -8,9 +8,11 @@ expect "Enter passphrase"
 send "$SSH_PASS\r"
 expect eof
 EOF
-rsync -avz --delete --exclude-from="$EXCLUDE_FILE" \
-      -e "ssh -i $SSH_KEY -p $REMOTE_PORT" \
-      "$LOCAL_DIR" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR"
+
+ssh -i "$SSH_PATH" -p $REMOTE_PORT "$REMOTE_USER@$REMOTE_HOST" << EOF
+cd "$REMOTE_DIR" || exit
+git pull origin "$GIT_BRANCH"
+EOF
+
 
 ssh-agent -k
-

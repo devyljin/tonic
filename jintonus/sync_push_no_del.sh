@@ -8,7 +8,7 @@ expect "Enter passphrase"
 send "$SSH_PASS\r"
 expect eof
 EOF
-rsync -avz --delete --exclude-from="$EXCLUDE_FILE" \
+rsync -avz --exclude-from="$EXCLUDE_FILE" \
       -e "ssh -i $SSH_KEY -p $REMOTE_PORT" \
       "$LOCAL_DIR" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR"
 

@@ -3,6 +3,7 @@
 .env
 .env.*
 /jintonus/dump/
+/jintonus/log/
 /override-no-commited/
 
 

@@ -32,13 +32,14 @@ if [[ "$DOWNLOAD_EVERYTHING" == 0 && "$DOWNLOAD_DAILY" == 0 ]]; then
        echo "Quelles données voulez vous récuperer depuis le serveur ?"
 
        DOWNLOAD_ALL_DUMP_CHOICE="Télécharger le dump de toute la base de donnée"
+       DOWNLOAD_NO_DATA_DUMP_CHOICE="Télécharger la structure sans données"
        DOWNLOAD_DAILY_DUMP_CHOICE="Télécharger le dump avec les données Juriste"
        DOWNLOAD_CLIENT_DUMP_CHOICE="Télécharger le dump comportant les données client"
        DOWNLOAD_STRUCT_DUMP_CHOICE="Télécharger le dump de la structure de Joomla"
 
        # Choix multiples avec gum
        ACTIONS=$(gum choose --cursor-prefix "[ ] " --selected-prefix "[✓] " --no-limit \
-         "$DOWNLOAD_ALL_DUMP_CHOICE" "$DOWNLOAD_DAILY_DUMP_CHOICE" "$DOWNLOAD_CLIENT_DUMP_CHOICE" "$DOWNLOAD_STRUCT_DUMP_CHOICE")
+         "$DOWNLOAD_ALL_DUMP_CHOICE" "$DOWNLOAD_NO_DATA_DUMP_CHOICE" "$DOWNLOAD_DAILY_DUMP_CHOICE" "$DOWNLOAD_CLIENT_DUMP_CHOICE" "$DOWNLOAD_STRUCT_DUMP_CHOICE")
 
        clear
        echo "Tu as choisi :"
@@ -49,6 +50,9 @@ if [[ "$DOWNLOAD_EVERYTHING" == 0 && "$DOWNLOAD_DAILY" == 0 ]]; then
          case "$action" in
            "$DOWNLOAD_ALL_DUMP_CHOICE")
              export DOWNLOAD_DUMP_ALL=1
+             ;;
+           "$DOWNLOAD_NO_DATA_DUMP_CHOICE")
+             export DOWNLOAD_NO_DATA_DUMP=1
              ;;
            "$DOWNLOAD_DAILY_DUMP_CHOICE")
              export DOWNLOAD_DUMP_DAILY=1
@@ -82,14 +86,14 @@ if [[ "$IMPORT_EVERYTHING" == 0 && "$IMPORT_DAILY" == 0 ]]; then
 
        clear
        echo "Quelles données voulez vous importer dans votre base de donnée ?"
-
+       IMPORT_NO_DATA_DUMP_CHOICE="Importer la struture vide (sans données)"
        IMPORT_DAILY_DUMP_CHOICE="Importer le dump avec les données Juriste"
        IMPORT_CLIENT_DUMP_CHOICE="Importer le dump comportant les données client"
        IMPORT_STRUCT_DUMP_CHOICE="Importer le dump de la structure de Joomla"
 
        # Choix multiples avec gum
        ACTIONS=$(gum choose --cursor-prefix "[ ] " --selected-prefix "[✓] " --no-limit \
-         "$IMPORT_DAILY_DUMP_CHOICE" "$IMPORT_CLIENT_DUMP_CHOICE" "$IMPORT_STRUCT_DUMP_CHOICE")
+         "$IMPORT_DAILY_DUMP_CHOICE" "$IMPORT_NO_DATA_DUMP_CHOICE" "$IMPORT_CLIENT_DUMP_CHOICE" "$IMPORT_STRUCT_DUMP_CHOICE")
 
        clear
        echo "Tu as choisi :"
@@ -100,6 +104,9 @@ if [[ "$IMPORT_EVERYTHING" == 0 && "$IMPORT_DAILY" == 0 ]]; then
          case "$action" in
            "$IMPORT_DAILY_DUMP_CHOICE")
              export IMPORT_DUMP_DAILY=1
+             ;;
+           "$IMPORT_NO_DATA_DUMP_CHOICE")
+             export IMPORT_NO_DATA_DUMP=1
              ;;
            "$IMPORT_CLIENT_DUMP_CHOICE")
              export IMPORT_DUMP_CLIENT=1

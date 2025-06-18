@@ -37,6 +37,8 @@ if [[ "$ENSURE_PROD" == 666 && "$PROD" == 1 ]]; then
   export REMOTE_HOST=$RSYNC_PROD_REMOTE_HOST
   export LOCAL_DIR=$RSYNC_PROD_LOCAL_DIR
   export REMOTE_DIR=$RSYNC_PROD_REMOTE_DIR
+  export GIT_BRANCH=$PROD_GIT_BRANCH
+  export DRY_RUN_LOG=$RSYNC_PROD_DRY_RUN_LOG_FILE
   ENV_CHOOSEN=1
 
   else
@@ -48,17 +50,28 @@ if [[ "$ENSURE_PROD" == 666 && "$PROD" == 1 ]]; then
   export REMOTE_HOST=$RSYNC_PREPROD_REMOTE_HOST
   export LOCAL_DIR=$RSYNC_PREPROD_LOCAL_DIR
   export REMOTE_DIR=$RSYNC_PREPROD_REMOTE_DIR
+  export GIT_BRANCH=$PREPROD_GIT_BRANCH
+  export DRY_RUN_LOG=$RSYNC_PREPROD_DRY_RUN_LOG_FILE
   ENV_CHOOSEN=1
 fi
 while [ "$ENV_CHOOSEN" -eq 1 ]; do
 
 # Demande à l'utilisateur de choisir une option
-CHOICE=$(gum choose "Push" "Je veux changer d'environement" "Quitter")
+CHOICE=$(gum choose "Comparer les changements" "Push (supprimer les fichier manquant)" "Push" "Pull depuis Git" "Je veux changer d'environement" "Quitter")
 
 # Agir en fonction du choix
 case "$CHOICE" in
+  "Comparer les changements")
+      ./jintonus/sync_push_diff.sh
+      ;;
   "Push")
+    ./jintonus/sync_push_no_del.sh
+    ;;
+  "Push (supprimer les fichier manquant)")
     ./jintonus/sync_push.sh
+    ;;
+  "Pull depuis Git")
+    ./jintonus/sync_server_git_pull.sh
     ;;
   "Je veux changer d'environement")
     ENV_CHOOSEN=0

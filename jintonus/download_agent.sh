@@ -7,7 +7,12 @@ else
     exit 1
 fi
 
-
+if [[ "$DOWNLOAD_NO_DATA_DUMP" == 1 || "$DOWNLOAD_EVERYTHING" == 1 || "$DOWNLOAD_DAILY" == 1 ]]; then
+    #Importer La structure vide
+    export LOCAL_PATH=$NO_DATA_LOCAL_PATH
+    export REMOTE_PATH=$NO_DATA_REMOTE_PATH
+    ./jintonus/download_dump.sh
+fi
 
 if [[ "$DOWNLOAD_DUMP_DAILY" == 1 || "$DOWNLOAD_EVERYTHING" == 1 || "$DOWNLOAD_DAILY" == 1 ]]; then
     #Importer DAILY
