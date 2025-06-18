@@ -32,22 +32,22 @@ spin $task_pid
 docker-compose down
 docker-compose up -d --build
 
-git clone "$GIT_REPO_URL" ./main-repo
+git clone "$GIT_REPO_URL" $LOCAL_PROJECT_PATH
 
 ## Changement de branch provisoire, a retirer quand la main sera aux normes
-cd ./main-repo
+cd $LOCAL_PROJECT_PATH
 git checkout --force docker-ready
 cd ..
 #
-cp -r ./override-no-commited/* ./main-repo/
+cp -r ./override-no-commited/* $LOCAL_PROJECT_PATH
 docker-compose up -d --build
 docker-compose exec joomla bash -c "cd /var/www/html/components/com_agrume && composer install"
 
-rm -rf ./main-repo/installation
+rm -rf $LOCAL_PROJECT_PATH/installation
 
 
 ## Changement de branch provisoire, a retirer quand la main sera aux normes
-cd ./main-repo
+cd $LOCAL_PROJECT_PATH
 git checkout --force docker-ready
 cd ..
 #
